@@ -1,0 +1,68 @@
+<p id="notice"><%= notice %></p>
+
+<div class="row">
+    <div class="form-group col-sm-6">
+      <span>Request Number: </span>
+      <strong><%= @ticket.request_number %></strong>
+    </div>
+    <div class="form-group col-sm-6">
+      <span>Sequence Number: </span>
+      <strong><%= @ticket.sequence_number %></strong>
+    </div>
+    <div class="form-group col-sm-6">
+      <span>Request Type: </span>
+      <strong><%= @ticket.request_type %></strong>
+    </div>
+    <div class="form-group col-sm-6">
+      <span>Response Due DateTime: </span>
+      <strong><%= @ticket.response_due_date_time %></strong>
+    </div>
+    <div class="form-group col-sm-6">
+      <span>Primary SACode: </span>
+      <strong><%= @ticket.primary_service_area_code %></strong>
+    </div>
+    <div class="form-group col-sm-6">
+      <span>Additional SACode: </span>
+      <strong><%= @ticket.additional_service_area_code %></strong>
+    </div>
+    <div class="form-group col-sm-6">
+      <span>Well Known Text: </span>
+      <strong><%= @ticket.well_known_text %></strong>
+    </div>
+</div>
+
+<hr>
+
+<label>Excavators:</label>
+<% @ticket.excavators.each do |excavator| %>
+	<%= render partial: "excavators/excavator", locals: {excavator: excavator} %>
+<% end %>
+
+<hr>
+
+<div style='width: 800px;'>
+  <div id="map" style='width: 800px; height: 400px;'></div>
+</div>
+
+<script type="text/javascript">
+	var polygons_text = "<%= @ticket.well_known_text %>".match(/((-){0,1}\d+(\.){0,1}\d+) ((-){0,1}\d+(\.){0,1}\d+)/g);
+	var polygons_arr = [];
+	polygons_text.forEach(function(pt) {
+		polygons_arr.push({lng: pt.split(' ')[0] * 1 / 100000, lat: pt.split(' ')[1] * 1 / 100000});
+	});
+
+  	var handler = Gmaps.build('Google');
+	handler.buildMap({ internal: {id: 'map'}}, function(){
+	  var polygons = handler.addPolygons(
+	    [
+	      polygons_arr
+	    ],
+	    { strokeColor: '#FF0000'}
+	  );
+
+	  handler.bounds.extendWith(polygons);
+	  handler.fitMapToBounds();
+	});
+</script>
+<%= link_to 'Edit', edit_ticket_path(@ticket) %> |
+<%= link_to 'Back', tickets_path %>

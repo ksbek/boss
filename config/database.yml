@@ -1,0 +1,23 @@
+development: &development
+  adapter: postgresql
+  encoding: unicode
+  host: localhost
+  username: postgres
+  password: password
+  database: boss
+  pool: 5
+
+test: &test
+  host: localhost
+  adapter:  postgresql
+  host:     localhost
+  encoding: unicode
+  database: boss_text
+  pool:     5
+  username: postgres
+  password: password
+
+
+production: &production
+  url:  <%= ENV["DATABASE_URL"] %>
+  pool: <%= ENV["DB_POOL"] || ENV['MAX_THREADS'] || 5 %>

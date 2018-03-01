@@ -1,0 +1,48 @@
+<%= form_with(model: ticket, local: true) do |form| %>
+  <% if ticket.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(ticket.errors.count, "error") %> prohibited this ticket from being saved:</h2>
+
+      <ul>
+      <% ticket.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group col-sm-6">
+      <label>Request Number</label>
+      <%= form.text_field :request_number, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Sequence Number</label>
+      <%= form.text_field :sequence_number, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Request Type</label>
+      <%= form.text_field :request_type, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Response Due DateTime</label>
+      <%= form.text_field :response_due_date_time, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Primary SACode</label>
+      <%= form.text_field :primary_service_area_code, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Additional SACode</label>
+      <%= form.text_field :additional_service_area_code, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Well Known Text</label>
+      <%= form.text_field :well_known_text, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

@@ -1,0 +1,48 @@
+<%= form_with(model: excavator, local: true) do |form| %>
+  <% if excavator.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(excavator.errors.count, "error") %> prohibited this excavator from being saved:</h2>
+
+      <ul>
+      <% excavator.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="row">
+    <div class="form-group col-sm-12">
+      <label>Ticket</label>
+      <%= form.collection_select :ticket_id, Ticket.all, :id, :id, {}, {class: 'form-control'} %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Company Name</label>
+      <%= form.text_field :company_name, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Address</label>
+      <%= form.text_field :address, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>City</label>
+      <%= form.text_field :city, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>State</label>
+      <%= form.text_field :state, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Zip</label>
+      <%= form.text_field :zip, class: 'form-control' %>
+    </div>
+    <div class="form-group col-sm-6">
+      <label>Crew on Site</label>
+      <%= form.text_field :crew_on_site, class: 'form-control' %>
+    </div>
+  </div>
+  
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

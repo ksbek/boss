@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Tickets</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Request Number</th>
+      <th>Sequence Number</th>
+      <th>Request Type</th>
+      <th>Response Due Date Time</th>
+      <th>Primary SACode</th>
+      <th>Additional SACode</th>
+      <th>Well Known Text</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @tickets.each do |ticket| %>
+      <tr>
+        <td><%= ticket.request_number %></td>
+        <td><%= ticket.sequence_number %></td>
+        <td><%= ticket.request_type %></td>
+        <td><%= ticket.response_due_date_time %></td>
+        <td><%= ticket.primary_service_area_code %></td>
+        <td><%= ticket.additional_service_area_code %></td>
+        <td><%= ticket.well_known_text %></td>
+        <td>
+          <%= link_to 'Show', ticket %>
+          <%= link_to 'Edit', edit_ticket_path(ticket) %>
+          <%= link_to 'Destroy', ticket, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Ticket', new_ticket_path %>

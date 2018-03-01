@@ -1,0 +1,41 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Excavators</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Ticket</th>
+      <th>Company Name</th>
+      <th>Address</th>
+      <th>City</th>
+      <th>State</th>
+      <th>Zip</th>
+      <th>Crew on Site</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @excavators.each do |excavator| %>
+      <tr>
+        <td><%= link_to excavator.ticket.id, excavator.ticket %></td>
+        <td><%= excavator.company_name %></td>
+        <td><%= excavator.address %></td>
+        <td><%= excavator.city %></td>
+        <td><%= excavator.state %></td>
+        <td><%= excavator.zip %></td>
+        <td><%= excavator.crew_on_site %></td>
+        <td>
+          <%= link_to 'Show', excavator %>
+          <%= link_to 'Edit', edit_excavator_path(excavator) %>
+          <%= link_to 'Destroy', excavator, method: :delete, data: { confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Excavator', new_excavator_path %>
